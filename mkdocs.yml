@@ -1,0 +1,22 @@
+---
+site_name: Appsilon Interview - Documentation
+repo_url: https://github.com/appsilon-interview/docs
+strict: true
+theme:
+  name: material
+  palette:
+    primary: blue
+  font:
+    text: Work Sans
+markdown_extensions:
+  - codehilite
+  - admonition
+  - footnotes
+  - toc:
+      permalink: true
+nav:
+  - Overview: README.md
+  - getting-started.md
+  - Architecture:
+      - Infrastructure: infrastructure-architecture.md
+  - Example: deploy-environment-example.md
