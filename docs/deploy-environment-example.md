@@ -1,10 +1,8 @@
-Deploy Environment Example
-===========================
+# Deploy Environment Example
 
-Building Application Docker Image
---------------------------------
+## Building Application
 
-Prior to deploying application, Docker image should be built first. To build the image,
+Prior to deploying application into AWS, Docker image should be built first. To build the image,
 clone the repository:
 
 ``` {.sh}
@@ -20,7 +18,7 @@ $ make build
 
 [![asciicast](https://asciinema.org/a/400482.svg)](https://asciinema.org/a/400482)
 
-To push image to DockerHub, you'll need to log into DockerHub first:
+After image is built, you will need to push it to the DockerHub. To do so, log into DockerHub first:
 
 ``` {.sh}
 $ export DOCKER_PASSWORD=<your dockerhub password>
@@ -33,22 +31,21 @@ Tag and push image:
 $ make publish
 ```
 
-Deploying infrastructure
---------------------------------
+## Deploying Infrastructure
 
-A [terraform](https://www.terraform.io/) module to deploy a secure,
-functional staging environment on [AWS](http://aws.amazon.com/).
+In order to deploy a staging environment with all required AWS components, a dedicated [terraform](https://www.terraform.io/) module was created. 
 
-Dependencies
-------------
+For detailed explanation of AWS components used and their respective Terraform resources, please see module's respective [README](https://github.com/appsilon-interview/terraform/blob/master/modules/terraform-aws-appsilon/README.md) page.
+
+
+### Dependencies
 
 The following is required to be installed on your system:
 
 -   terraform
 -   awscli
 
-Deployment
-----------
+### Deployment
 
 To deploy infrastructure, clone the repository:
 
@@ -64,7 +61,8 @@ output:
 $ aws configure
 ```
 
-Using your favourite editor, update values in [terraform.tfvars](https://github.com/appsilon-interview/terraform/blob/master/terraform.tfvars)
+Copy [example.tfvars](https://github.com/appsilon-interview/terraform/blob/master/example.tfvars)
+to `terraform.tfvars` and using your favourite editor, update values
 to suit your needs.
 
 
@@ -72,12 +70,12 @@ to suit your needs.
 $ vim terraform.tfvars
 region               = "eu-west-2"
 domain               = "kloud-native.net"
-appsilon_subdomain   = <subdomain for your application>
-rds_username         = <database username>
-rds_password         = <database password>
-rds_db_name          = "<database name>
+appsilon_subdomain   = "rshiny"
+rds_username         = appsilon-user
+rds_password         = sup3rs3cr3tpw
+rds_db_name          = "appsilon-db"
 rds_instance         = "db.t2.micro"
-appsilon_version_tag = <docker tag of your built image>
+appsilon_version_tag = "c9a417a"
 ```
 
 Run `terraform init` to initalize modules:
@@ -100,8 +98,12 @@ $ terraform apply -auto-approve
 ```
 [![asciicast](https://asciinema.org/a/400796.svg)](https://asciinema.org/a/400796)
 
+Wait for ECS task to be provisioned and head down to `https://<your subdomain>.<domain>` to verify
+the application had been deployed and is reachable.
 
-Run `terraform destroy` to destroy your resources:
+
+## Cleaning Up
+Run `terraform destroy` to destroy your existing resources:
 
 ``` {.sh}
 $ terraform destroy -auto-aprove

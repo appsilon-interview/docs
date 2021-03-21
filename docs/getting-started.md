@@ -12,7 +12,7 @@ VPC, compute instances, DNS records, RDS instance and many more.
 
 **AWS**[^3] public cloud is used as a Cloud provider of choice.
 
-**R-Shiny**[^5] is used as a framework to deploy an example application.
+**R-Shiny**[^5] is used as a framework for example application.
 
 All Docker images are stored in public **DockerHub**[^6] registry.
 
