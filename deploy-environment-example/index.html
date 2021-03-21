@@ -324,29 +324,42 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#building-application-docker-image" title="Building Application Docker Image" class="md-nav__link">
-    Building Application Docker Image
+  <a href="#building-application" title="Building Application" class="md-nav__link">
+    Building Application
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#deploying-infrastructure" title="Deploying infrastructure" class="md-nav__link">
-    Deploying infrastructure
+  <a href="#deploying-infrastructure" title="Deploying Infrastructure" class="md-nav__link">
+    Deploying Infrastructure
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#dependencies" title="Dependencies" class="md-nav__link">
     Dependencies
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#deployment" title="Deployment" class="md-nav__link">
     Deployment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cleaning-up" title="Cleaning Up" class="md-nav__link">
+    Cleaning Up
   </a>
   
 </li>
@@ -383,29 +396,42 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#building-application-docker-image" title="Building Application Docker Image" class="md-nav__link">
-    Building Application Docker Image
+  <a href="#building-application" title="Building Application" class="md-nav__link">
+    Building Application
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#deploying-infrastructure" title="Deploying infrastructure" class="md-nav__link">
-    Deploying infrastructure
+  <a href="#deploying-infrastructure" title="Deploying Infrastructure" class="md-nav__link">
+    Deploying Infrastructure
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#dependencies" title="Dependencies" class="md-nav__link">
     Dependencies
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#deployment" title="Deployment" class="md-nav__link">
     Deployment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cleaning-up" title="Cleaning Up" class="md-nav__link">
+    Cleaning Up
   </a>
   
 </li>
@@ -430,8 +456,8 @@
                 
                 
                 <h1 id="deploy-environment-example">Deploy Environment Example<a class="headerlink" href="#deploy-environment-example" title="Permanent link">&para;</a></h1>
-<h2 id="building-application-docker-image">Building Application Docker Image<a class="headerlink" href="#building-application-docker-image" title="Permanent link">&para;</a></h2>
-<p>Prior to deploying application, Docker image should be built first. To build the image,
+<h2 id="building-application">Building Application<a class="headerlink" href="#building-application" title="Permanent link">&para;</a></h2>
+<p>Prior to deploying application into AWS, Docker image should be built first. To build the image,
 clone the repository:</p>
 <div class="codehilite"><pre><span></span><code>$ git clone git@github.com:appsilon-interview/app.git
 $ <span class="nb">cd</span> app
@@ -442,7 +468,7 @@ $ <span class="nb">cd</span> app
 </code></pre></div>
 
 <p><a href="https://asciinema.org/a/400482"><img alt="asciicast" src="https://asciinema.org/a/400482.svg" /></a></p>
-<p>To push image to DockerHub, you'll need to log into DockerHub first:</p>
+<p>After image is built, you will need to push it to the DockerHub. To do so, log into DockerHub first:</p>
 <div class="codehilite"><pre><span></span><code>$ <span class="nb">export</span> <span class="nv">DOCKER_PASSWORD</span><span class="o">=</span>&lt;your dockerhub password&gt;
 $ <span class="nb">export</span> <span class="nv">DOCKER_USERNAME</span><span class="o">=</span>&lt;your dockerhub username&gt;
 $ <span class="nb">echo</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">DOCKER_PASSWORD</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">|</span> docker login --username <span class="s2">&quot;</span><span class="nv">$DOCKER_USERNAME</span><span class="s2">&quot;</span> --password-stdin
@@ -452,16 +478,16 @@ $ <span class="nb">echo</span> <span class="s2">&quot;</span><span class="si">${
 <div class="codehilite"><pre><span></span><code>$ make publish
 </code></pre></div>
 
-<h2 id="deploying-infrastructure">Deploying infrastructure<a class="headerlink" href="#deploying-infrastructure" title="Permanent link">&para;</a></h2>
-<p>A <a href="https://www.terraform.io/">terraform</a> module to deploy a secure,
-functional staging environment on <a href="http://aws.amazon.com/">AWS</a>.</p>
-<h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h2>
+<h2 id="deploying-infrastructure">Deploying Infrastructure<a class="headerlink" href="#deploying-infrastructure" title="Permanent link">&para;</a></h2>
+<p>In order to deploy a staging environment with all required AWS components, a dedicated <a href="https://www.terraform.io/">terraform</a> module was created. </p>
+<p>For detailed explanation of AWS components used and their respective Terraform resources, please see module's respective <a href="https://github.com/appsilon-interview/terraform/blob/master/modules/terraform-aws-appsilon/README.md">README</a> page.</p>
+<h3 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h3>
 <p>The following is required to be installed on your system:</p>
 <ul>
 <li>terraform</li>
 <li>awscli</li>
 </ul>
-<h2 id="deployment">Deployment<a class="headerlink" href="#deployment" title="Permanent link">&para;</a></h2>
+<h3 id="deployment">Deployment<a class="headerlink" href="#deployment" title="Permanent link">&para;</a></h3>
 <p>To deploy infrastructure, clone the repository:</p>
 <div class="codehilite"><pre><span></span><code>$ git clone git@github.com:appsilon-interview/terraform.git
 $ <span class="nb">cd</span> terraform
@@ -472,17 +498,18 @@ output:</p>
 <div class="codehilite"><pre><span></span><code>$ aws configure
 </code></pre></div>
 
-<p>Using your favourite editor, update values in <a href="https://github.com/appsilon-interview/terraform/blob/master/terraform.tfvars">terraform.tfvars</a>
+<p>Copy <a href="https://github.com/appsilon-interview/terraform/blob/master/example.tfvars">example.tfvars</a>
+to <code>terraform.tfvars</code> and using your favourite editor, update values
 to suit your needs.</p>
 <div class="codehilite"><pre><span></span><code>$ vim terraform.tfvars
 <span class="nv">region</span>               <span class="o">=</span> <span class="s2">&quot;eu-west-2&quot;</span>
 <span class="nv">domain</span>               <span class="o">=</span> <span class="s2">&quot;kloud-native.net&quot;</span>
-<span class="nv">appsilon_subdomain</span>   <span class="o">=</span> &lt;subdomain <span class="k">for</span> your application&gt;
-<span class="nv">rds_username</span>         <span class="o">=</span> &lt;database username&gt;
-<span class="nv">rds_password</span>         <span class="o">=</span> &lt;database password&gt;
-<span class="nv">rds_db_name</span>          <span class="o">=</span> <span class="s2">&quot;&lt;database name&gt;</span>
-<span class="s2">rds_instance         = &quot;</span>db.t2.micro<span class="s2">&quot;</span>
-<span class="s2">appsilon_version_tag = &lt;docker tag of your built image&gt;</span>
+<span class="nv">appsilon_subdomain</span>   <span class="o">=</span> <span class="s2">&quot;rshiny&quot;</span>
+<span class="nv">rds_username</span>         <span class="o">=</span> appsilon-user
+<span class="nv">rds_password</span>         <span class="o">=</span> sup3rs3cr3tpw
+<span class="nv">rds_db_name</span>          <span class="o">=</span> <span class="s2">&quot;appsilon-db&quot;</span>
+<span class="nv">rds_instance</span>         <span class="o">=</span> <span class="s2">&quot;db.t2.micro&quot;</span>
+<span class="nv">appsilon_version_tag</span> <span class="o">=</span> <span class="s2">&quot;c9a417a&quot;</span>
 </code></pre></div>
 
 <p>Run <code>terraform init</code> to initalize modules:</p>
@@ -499,7 +526,10 @@ to suit your needs.</p>
 </code></pre></div>
 
 <p><a href="https://asciinema.org/a/400796"><img alt="asciicast" src="https://asciinema.org/a/400796.svg" /></a></p>
-<p>Run <code>terraform destroy</code> to destroy your resources:</p>
+<p>Wait for ECS task to be provisioned and head down to <code>https://&lt;your subdomain&gt;.&lt;domain&gt;</code> to verify
+the application had been deployed and is reachable.</p>
+<h2 id="cleaning-up">Cleaning Up<a class="headerlink" href="#cleaning-up" title="Permanent link">&para;</a></h2>
+<p>Run <code>terraform destroy</code> to destroy your existing resources:</p>
 <div class="codehilite"><pre><span></span><code>$ terraform destroy -auto-aprove
 </code></pre></div>
 
